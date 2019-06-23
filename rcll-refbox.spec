@@ -2,7 +2,7 @@
 %global   prerel  beta.2
 Name:		  rcll-refbox
 Version:	%{nextrel}~%{prerel}
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	The referee box (refbox) of the RoboCup Logistics League
 
 License:	GPLv2+
@@ -46,9 +46,8 @@ make %{?_smp_mflags} \
   EXEC_CONFDIR=%{_sysconfdir}/rcll-refbox \
   EXEC_BINDIR=%{_bindir} \
   EXEC_LIBDIR=%{_libdir} \
-  EXEC_SHAREDIR=%{_datadir}/rcll-refbox
-
-rm -rf lib/protobuf
+  EXEC_SHAREDIR=%{_datadir}/rcll-refbox \
+  uncolored-all
 
 
 %install
@@ -58,7 +57,7 @@ mkdir -p %{buildroot}/%{_datadir}/rcll-refbox/{games,msgs}
 mkdir -p %{buildroot}/%{_sysconfdir}/rcll-refbox
 
 install -p ./bin/* %{buildroot}/%{_bindir}/
-install -p ./lib/* %{buildroot}/%{_libdir}/
+find ./lib -type f -exec install -p '{}' %{buildroot}/%{_libdir}/ \;
 cp -a ./src/games/* %{buildroot}/%{_datadir}/rcll-refbox/games
 install -p ./src/msgs/*.proto %{buildroot}/%{_datadir}/rcll-refbox/msgs
 install -p ./cfg/* %{buildroot}/%{_sysconfdir}/rcll-refbox
@@ -73,7 +72,8 @@ install -p ./cfg/* %{buildroot}/%{_sysconfdir}/rcll-refbox
 
 
 %changelog
+* Sun Jun 23 2019 Till Hofmann <hofmann@kbsg.rwth-aachen.de> - 2019~beta.2-2
+- Also install protobuf message libraries
+
 * Sun Jun 23 2019 Till Hofmann <hofmann@kbsg.rwth-aachen.de> - 2019~beta.2-1
 - Initial package
-
-
