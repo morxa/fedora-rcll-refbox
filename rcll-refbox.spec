@@ -2,7 +2,7 @@
 %global   prerel  beta.2
 Name:		  rcll-refbox
 Version:	%{nextrel}~%{prerel}
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	The referee box (refbox) of the RoboCup Logistics League
 
 License:	GPLv2+
@@ -20,7 +20,6 @@ BuildRequires: gecode-devel
 BuildRequires: git
 BuildRequires: glibmm24-devel
 BuildRequires: gtkmm30-devel
-BuildRequires: mongodb-devel
 BuildRequires: ncurses-devel
 BuildRequires: openssh-clients
 BuildRequires: openssl-devel
@@ -42,7 +41,7 @@ CFLAGS="%{optflags}"
 export CFLAGS
 make switch-buildtype-sysinstall
 make %{?_smp_mflags} \
-  FAIL_ON_WARNING=1 \
+  FAIL_ON_WARNING=0 \
   EXEC_CONFDIR=%{_sysconfdir}/rcll-refbox \
   EXEC_BINDIR=%{_bindir} \
   EXEC_LIBDIR=%{_libdir} \
@@ -72,6 +71,9 @@ install -p ./cfg/* %{buildroot}/%{_sysconfdir}/rcll-refbox
 
 
 %changelog
+* Sun Jun 23 2019 Till Hofmann <hofmann@kbsg.rwth-aachen.de> - 2019~beta.2-3
+- Rebuild without mongodb support
+
 * Sun Jun 23 2019 Till Hofmann <hofmann@kbsg.rwth-aachen.de> - 2019~beta.2-2
 - Also install protobuf message libraries
 
