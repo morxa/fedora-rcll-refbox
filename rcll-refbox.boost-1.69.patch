@@ -1,0 +1,28 @@
+From e365bbcc3050fa74a68acba99425c008401f5050 Mon Sep 17 00:00:00 2001
+From: Till Hofmann <hofmann@kbsg.rwth-aachen.de>
+Date: Sat, 27 Jul 2019 15:02:55 +0200
+Subject: [PATCH] shell: adapt to boost::posix_time expecting long ints, not
+ floats
+
+The new boost version expects a long int as constructor argument for all
+boost::posix_time objects. Cast the time to a long int and construct it
+as milliseconds to keep the resolution.
+---
+ src/shell/shell.cpp | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/src/shell/shell.cpp b/src/shell/shell.cpp
+index 50f9b755..a7aed9fd 100644
+--- a/src/shell/shell.cpp
++++ b/src/shell/shell.cpp
+@@ -817,7 +817,9 @@ LLSFRefBoxShell::client_msg(uint16_t comp_id, uint16_t msg_type,
+     }
+     if (attmsg_has_endtime_) {
+       boost::posix_time::ptime now(boost::posix_time::microsec_clock::local_time());
+-      attmsg_endtime_ = now + boost::posix_time::seconds(am->time_to_show());
++      attmsg_endtime_ = now +
++        boost::posix_time::milliseconds(static_cast<long>(1000 *
++              am->time_to_show()));
+     }
+     if (attmsg_string_ != "") {
+       log(llsf_log_msgs::LogMessage::LL_ERROR, "A", "%s", attmsg_string_.c_str());
