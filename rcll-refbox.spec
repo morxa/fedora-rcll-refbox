@@ -1,14 +1,13 @@
-%global commit 848b440075d152d7f0fae03bada452666b854c87
+%global commit 1544b29d982e4e37f9b6ca2e2034eb50f543323d
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 Name:		  rcll-refbox
-Version:	2019
-Release:	2.%{shortcommit}%{?dist}
+Version:	2020
+Release:	0.1.%{shortcommit}%{?dist}
 Summary:	The referee box (refbox) of the RoboCup Logistics League
 
 License:	GPLv2+
 URL:		  https://github.com/robocup-logistics/rcll-refbox
 Source0:  https://github.com/robocup-logistics/rcll-refbox/archive/%{commit}/%{name}-%{shortcommit}.tar.gz
-Patch0:   rcll-refbox.uninitialized-machine-light.patch
 
 BuildRequires: avahi-devel
 BuildRequires: boost-devel
@@ -71,6 +70,9 @@ install -p ./cfg/* %{buildroot}/%{_sysconfdir}/rcll-refbox
 
 
 %changelog
+* Mon Mar 16 2020 Till Hofmann <hofmann@kbsg.rwth-aachen.de> - 2020-0.1.1544b29
+- Update to 2020 pre-release snapshot
+
 * Sun Oct 13 2019 Till Hofmann <hofmann@kbsg.rwth-aachen.de> - 2019-2.848b440
 - Switch to git snapshots, update to latest commit
 
