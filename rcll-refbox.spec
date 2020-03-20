@@ -40,6 +40,7 @@ CFLAGS="%{optflags}"
 export CFLAGS
 make switch-buildtype-sysinstall
 make %{?_smp_mflags} \
+  USE_AVAHI=0 \
   FAIL_ON_WARNING=0 \
   EXEC_CONFDIR=%{_sysconfdir}/rcll-refbox \
   EXEC_BINDIR=%{_bindir} \
