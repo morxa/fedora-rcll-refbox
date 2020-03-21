@@ -19,6 +19,7 @@ BuildRequires: gecode-devel
 BuildRequires: git
 BuildRequires: glibmm24-devel
 BuildRequires: gtkmm30-devel
+BuildRequires: mongo-cxx-driver-devel
 BuildRequires: ncurses-devel
 BuildRequires: openssh-clients
 BuildRequires: openssl-devel
