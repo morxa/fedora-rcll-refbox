@@ -1,8 +1,8 @@
-%global commit 1544b29d982e4e37f9b6ca2e2034eb50f543323d
+%global commit 4799979ece49676e5d4dba9fc52407fb5dc203ba
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 Name:		  rcll-refbox
 Version:	2020
-Release:	0.2.%{shortcommit}%{?dist}
+Release:	0.3.%{shortcommit}%{?dist}
 Summary:	The referee box (refbox) of the RoboCup Logistics League
 
 License:	GPLv2+
@@ -40,8 +40,7 @@ CFLAGS="%{optflags}"
 export CFLAGS
 make switch-buildtype-sysinstall
 make %{?_smp_mflags} \
-  USE_AVAHI=0 \
-  FAIL_ON_WARNING=0 \
+  FAIL_ON_WARNING=1 \
   EXEC_CONFDIR=%{_sysconfdir}/rcll-refbox \
   EXEC_BINDIR=%{_bindir} \
   EXEC_LIBDIR=%{_libdir} \
@@ -71,6 +70,11 @@ install -p ./cfg/* %{buildroot}/%{_sysconfdir}/rcll-refbox
 
 
 %changelog
+* Sat Mar 21 2020 Till Hofmann <hofmann@kbsg.rwth-aachen.de> - 2020-0.3.4799979
+- Update to latest upstream commit
+- Re-enable avahi
+- Enable FAIL_ON_WARNING
+
 * Fri Mar 20 2020 Till Hofmann <hofmann@kbsg.rwth-aachen.de> - 2020-0.2.1544b29
 - Disable AVAHI
 
