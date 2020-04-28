@@ -1,8 +1,8 @@
-%global commit 4799979ece49676e5d4dba9fc52407fb5dc203ba
+%global commit d3d554bce43ee7cdf79259e6e70f5ba0676540e4
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 Name:		  rcll-refbox
 Version:	2020
-Release:	0.4.%{shortcommit}%{?dist}
+Release:	0.5.%{shortcommit}%{?dist}
 Summary:	The referee box (refbox) of the RoboCup Logistics League
 
 License:	GPLv2+
@@ -71,6 +71,9 @@ install -p ./cfg/* %{buildroot}/%{_sysconfdir}/rcll-refbox
 
 
 %changelog
+* Tue Apr 28 2020 Till Hofmann <hofmann@kbsg.rwth-aachen.de> - 2020-0.5.d3d554b
+- Update to latest upstream commit
+
 * Thu Apr 23 2020 Till Hofmann <hofmann@kbsg.rwth-aachen.de> - 2020-0.4.4799979
 - Rebuild for soname change in freeopcua
 
