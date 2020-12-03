@@ -2,7 +2,7 @@
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 Name:		  rcll-refbox
 Version:	2020
-Release:	0.8.%{shortcommit}%{?dist}
+Release:	0.9.%{shortcommit}%{?dist}
 Summary:	The referee box (refbox) of the RoboCup Logistics League
 
 License:	GPLv2+
@@ -63,6 +63,9 @@ install -p ./bin/* %{buildroot}/%{_bindir}/
 find ./lib -type f -exec install -p '{}' %{buildroot}/%{_libdir}/ \;
 cp -a ./src/games/* %{buildroot}/%{_datadir}/rcll-refbox/games
 install -p ./src/msgs/*.proto %{buildroot}/%{_datadir}/rcll-refbox/msgs
+# TODO: This should be installed in RESDIR nad should be handled by make install.
+mkdir -p %{buildroot}/%{_datadir}/rcll-refbox/libs/websocket/message_schemas
+install -p ./src/libs/websocket/message_schemas/*.json %{buildroot}/%{_datadir}/rcll-refbox/libs/websocket/message_schemas
 install -p ./cfg/* %{buildroot}/%{_sysconfdir}/rcll-refbox
 
 
@@ -75,6 +78,9 @@ install -p ./cfg/* %{buildroot}/%{_sysconfdir}/rcll-refbox
 
 
 %changelog
+* Thu Dec  3 13:18:55 CET 2020 Till Hofmann <hofmann@kbsg.rwth-aachen.de> - 2020-0.9.4a64ed0
+- Install websocket message schemas
+
 * Thu Dec  3 08:07:53 CET 2020 Till Hofmann <hofmann@kbsg.rwth-aachen.de> - 2020-0.8.4a64ed0
 - Update to latest upstream commit
 - Add patch to fix compiler warnings on Fedora 33
