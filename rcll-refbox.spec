@@ -1,14 +1,16 @@
-%global commit ec529664d1f00d86dd8202488df98b16f652a8b0
+%global commit 4a64ed0bc0e9ee32677f668a5e8ae767f2b74c4f
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 Name:		  rcll-refbox
 Version:	2020
-Release:	0.7.%{shortcommit}%{?dist}
+Release:	0.8.%{shortcommit}%{?dist}
 Summary:	The referee box (refbox) of the RoboCup Logistics League
 
 License:	GPLv2+
 URL:		  https://github.com/robocup-logistics/rcll-refbox
 Source0:  https://github.com/robocup-logistics/rcll-refbox/archive/%{commit}/%{name}-%{shortcommit}.tar.gz
+Patch0:   rcll-refbox.f33-fix-compiler-warnings.patch
 
+BuildRequires: apr-util-devel
 BuildRequires: avahi-devel
 BuildRequires: boost-devel
 BuildRequires: clips-devel
@@ -19,12 +21,14 @@ BuildRequires: gecode-devel
 BuildRequires: git
 BuildRequires: glibmm24-devel
 BuildRequires: gtkmm30-devel
+BuildRequires: libmicrohttpd-devel
 BuildRequires: mongo-cxx-driver-devel
 BuildRequires: ncurses-devel
 BuildRequires: openssh-clients
 BuildRequires: openssl-devel
 BuildRequires: protobuf-compiler
 BuildRequires: protobuf-devel
+BuildRequires: rapidjson-devel
 BuildRequires: which
 BuildRequires: yaml-cpp-devel
 
@@ -71,6 +75,10 @@ install -p ./cfg/* %{buildroot}/%{_sysconfdir}/rcll-refbox
 
 
 %changelog
+* Thu Dec  3 08:07:53 CET 2020 Till Hofmann <hofmann@kbsg.rwth-aachen.de> - 2020-0.8.4a64ed0
+- Update to latest upstream commit
+- Add patch to fix compiler warnings on Fedora 33
+
 * Mon Nov  9 16:36:49 CET 2020 Till Hofmann <hofmann@kbsg.rwth-aachen.de> - 2020-0.7.ec52966
 - Update to latest upstream commit
 
