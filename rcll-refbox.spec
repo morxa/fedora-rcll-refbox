@@ -58,7 +58,7 @@ mkdir -p %{buildroot}/%{_libdir}
 mkdir -p %{buildroot}/%{_datadir}/rcll-refbox/{games,msgs}
 mkdir -p %{buildroot}/%{_sysconfdir}/rcll-refbox/cfg
 
-install -p ./bin/* %{buildroot}/%{_bindir}/
+find ./bin \( -name "llsf*" -o -name "rcll*" \) -exec install -p '{}' %{buildroot}/%{_bindir}/ \;
 find ./lib -type f -exec install -p '{}' %{buildroot}/%{_libdir}/ \;
 cp -a ./src/games/* %{buildroot}/%{_datadir}/rcll-refbox/games
 install -p ./src/msgs/*.proto %{buildroot}/%{_datadir}/rcll-refbox/msgs
