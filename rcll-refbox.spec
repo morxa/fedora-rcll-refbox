@@ -45,7 +45,7 @@ export CFLAGS
 make switch-buildtype-sysinstall
 make %{?_smp_mflags} \
   FAIL_ON_WARNING=1 \
-  EXEC_CONFDIR=%{_sysconfdir}/rcll-refbox \
+  EXEC_CONFDIR=%{_sysconfdir}/rcll-refbox/cfg/ \
   EXEC_BINDIR=%{_bindir} \
   EXEC_LIBDIR=%{_libdir} \
   EXEC_SHAREDIR=%{_datadir}/rcll-refbox \
@@ -56,7 +56,7 @@ make %{?_smp_mflags} \
 mkdir -p %{buildroot}/%{_bindir}
 mkdir -p %{buildroot}/%{_libdir}
 mkdir -p %{buildroot}/%{_datadir}/rcll-refbox/{games,msgs}
-mkdir -p %{buildroot}/%{_sysconfdir}/rcll-refbox
+mkdir -p %{buildroot}/%{_sysconfdir}/rcll-refbox/cfg
 
 install -p ./bin/* %{buildroot}/%{_bindir}/
 find ./lib -type f -exec install -p '{}' %{buildroot}/%{_libdir}/ \;
@@ -65,7 +65,7 @@ install -p ./src/msgs/*.proto %{buildroot}/%{_datadir}/rcll-refbox/msgs
 # TODO: This should be installed in RESDIR nad should be handled by make install.
 mkdir -p %{buildroot}/%{_datadir}/rcll-refbox/libs/websocket/message_schemas
 install -p ./src/libs/websocket/message_schemas/*.json %{buildroot}/%{_datadir}/rcll-refbox/libs/websocket/message_schemas
-install -p ./cfg/* %{buildroot}/%{_sysconfdir}/rcll-refbox
+find ./cfg/* -type f -exec install -Dp "{}" "%{buildroot}/%{_sysconfdir}/rcll-refbox/{}" \;
 
 
 %files
