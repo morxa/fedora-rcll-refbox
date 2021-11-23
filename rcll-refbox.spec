@@ -45,7 +45,7 @@ export CFLAGS
 make switch-buildtype-sysinstall
 make %{?_smp_mflags} \
   FAIL_ON_WARNING=1 \
-  EXEC_CONFDIR=%{_sysconfdir}/rcll-refbox/cfg/ \
+  EXEC_CONFDIR=%{_sysconfdir}/rcll-refbox/ \
   EXEC_BINDIR=%{_bindir} \
   EXEC_LIBDIR=%{_libdir} \
   EXEC_SHAREDIR=%{_datadir}/rcll-refbox \
@@ -62,11 +62,12 @@ find ./bin \( -name "llsf*" -o -name "rcll*" \) -exec install -p '{}' %{buildroo
 find ./lib -type f -exec install -p '{}' %{buildroot}/%{_libdir}/ \;
 cp -a ./src/games/* %{buildroot}/%{_datadir}/rcll-refbox/games
 install -p ./src/msgs/*.proto %{buildroot}/%{_datadir}/rcll-refbox/msgs
-# TODO: This should be installed in RESDIR nad should be handled by make install.
+# TODO: This should be installed in RESDIR and should be handled by make install.
 mkdir -p %{buildroot}/%{_datadir}/rcll-refbox/libs/websocket/message_schemas
 install -p ./src/libs/websocket/message_schemas/*.json %{buildroot}/%{_datadir}/rcll-refbox/libs/websocket/message_schemas
-find ./cfg/* -type f -exec install -Dp "{}" "%{buildroot}/%{_sysconfdir}/rcll-refbox/{}" \;
-
+cd cfg
+find * -type f -exec install -Dp "{}" "%{buildroot}/%{_sysconfdir}/rcll-refbox/{}" \;
+cd ..
 
 %files
 %doc
