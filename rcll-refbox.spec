@@ -1,8 +1,8 @@
-%global commit b9d01299faad96548cb5d7d793f27b47bcb460fd
+%global commit d403548448a7a4cf450a034d70f807ff94aefdfd
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 Name:		  rcll-refbox
 Version:	2021
-Release:	0.1.%{shortcommit}%{?dist}
+Release:	0.2.%{shortcommit}%{?dist}
 Summary:	The referee box (refbox) of the RoboCup Logistics League
 
 License:	GPLv2+
@@ -45,7 +45,7 @@ export CFLAGS
 make switch-buildtype-sysinstall
 make %{?_smp_mflags} \
   FAIL_ON_WARNING=1 \
-  EXEC_CONFDIR=%{_sysconfdir}/rcll-refbox \
+  EXEC_CONFDIR=%{_sysconfdir}/rcll-refbox/ \
   EXEC_BINDIR=%{_bindir} \
   EXEC_LIBDIR=%{_libdir} \
   EXEC_SHAREDIR=%{_datadir}/rcll-refbox \
@@ -56,17 +56,17 @@ make %{?_smp_mflags} \
 mkdir -p %{buildroot}/%{_bindir}
 mkdir -p %{buildroot}/%{_libdir}
 mkdir -p %{buildroot}/%{_datadir}/rcll-refbox/{games,msgs}
-mkdir -p %{buildroot}/%{_sysconfdir}/rcll-refbox
+mkdir -p %{buildroot}/%{_sysconfdir}/rcll-refbox/cfg
 
-install -p ./bin/* %{buildroot}/%{_bindir}/
+install -p ./bin/llsf* %{buildroot}/%{_bindir}/
+install -p ./bin/rcll* %{buildroot}/%{_bindir}/
 find ./lib -type f -exec install -p '{}' %{buildroot}/%{_libdir}/ \;
 cp -a ./src/games/* %{buildroot}/%{_datadir}/rcll-refbox/games
 install -p ./src/msgs/*.proto %{buildroot}/%{_datadir}/rcll-refbox/msgs
-# TODO: This should be installed in RESDIR nad should be handled by make install.
+# TODO: This should be installed in RESDIR and should be handled by make install.
 mkdir -p %{buildroot}/%{_datadir}/rcll-refbox/libs/websocket/message_schemas
 install -p ./src/libs/websocket/message_schemas/*.json %{buildroot}/%{_datadir}/rcll-refbox/libs/websocket/message_schemas
-install -p ./cfg/* %{buildroot}/%{_sysconfdir}/rcll-refbox
-
+cp -a ./cfg/* %{buildroot}/%{_sysconfdir}/rcll-refbox/
 
 %files
 %doc
@@ -77,6 +77,9 @@ install -p ./cfg/* %{buildroot}/%{_sysconfdir}/rcll-refbox
 
 
 %changelog
+* Sat Nov  14 15:29:55 CET 2021 Tarik Viehmann <viehmann@kbsg.rwth-aachen.de> - 2021-0.2.f9fe119
+- Update to customizable configuration loading
+
 * Fri May  14 09:33:51 CET 2021 Tarik Viehmann <viehmann@kbsg.rwth-aachen.de> - 2021-0.1.b9d0129
 - Update to latest upstream commit
 
