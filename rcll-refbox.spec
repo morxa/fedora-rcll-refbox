@@ -65,9 +65,7 @@ install -p ./src/msgs/*.proto %{buildroot}/%{_datadir}/rcll-refbox/msgs
 # TODO: This should be installed in RESDIR and should be handled by make install.
 mkdir -p %{buildroot}/%{_datadir}/rcll-refbox/libs/websocket/message_schemas
 install -p ./src/libs/websocket/message_schemas/*.json %{buildroot}/%{_datadir}/rcll-refbox/libs/websocket/message_schemas
-cd cfg
-find * -type f -exec install -Dp "{}" "%{buildroot}/%{_sysconfdir}/rcll-refbox/{}" \;
-cd ..
+cp -a ./cfg/* %{buildroot}/%{_sysconfdir}/rcll-refbox/
 
 %files
 %doc
