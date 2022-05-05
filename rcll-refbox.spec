@@ -1,8 +1,8 @@
-%global commit d403548448a7a4cf450a034d70f807ff94aefdfd
+%global commit e8d8b1c5f5de1af7b1c8abb373807c84735f7cf7
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 Name:		  rcll-refbox
-Version:	2021
-Release:	0.2.%{shortcommit}%{?dist}
+Version:	2022
+Release:	0.1.%{shortcommit}%{?dist}
 Summary:	The referee box (refbox) of the RoboCup Logistics League
 
 License:	GPLv2+
@@ -77,6 +77,9 @@ cp -a ./cfg/* %{buildroot}/%{_sysconfdir}/rcll-refbox/
 
 
 %changelog
+* Thu May 05 2022 Till Hofmann <hofmann@kbsg.rwth-aachen.de> - 2022-0.1.e8d8b1c
+- Update to latest upstream commit
+
 * Sat Nov  14 15:29:55 CET 2021 Tarik Viehmann <viehmann@kbsg.rwth-aachen.de> - 2021-0.2.f9fe119
 - Update to customizable configuration loading
 
